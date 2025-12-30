@@ -1,10 +1,10 @@
 SELECT * from all_users;
 ALTER SESSION set "_oracle_script" = true;
--- scott(»ç¿ëÀÚ)/ tiger (ºñ¹Ð¹øÈ£) / ÀÏ¹Ý »ç¿ëÀÚ ±ÇÇÑ
+-- scott(ì‚¬ìš©ìž)/ tiger (ë¹„ë°€ë²ˆí˜¸) / ì¼ë°˜ ì‚¬ìš©ìž ê¶Œí•œ
 
 create user hr
 IDENTIFIED by hr
 DEFAULT TABLESPACE users
 TEMPORARY TABLESPACE temp;
 
-GRANT CONNECT, resource, UNLIMITED TABLESPACE to hr; -- scott °èÁ¤¿¡ »ç¿ëÀÚ ±ÇÇÑ ºÎ¿©
+GRANT CONNECT, resource, UNLIMITED TABLESPACE to hr; -- scott ê³„ì •ì— ì‚¬ìš©ìž ê¶Œí•œ ë¶€ì—¬

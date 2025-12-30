@@ -1,40 +1,41 @@
--- scott °èÁ¤ ¼ÒÀ¯ÀÇ Å×ÀÌºí ¸ñ·Ï Á¶È¸
--- sql: structured Query Language µ¥ÀÌÅÍº£ÀÌ½º Á¢±Ù ¾ð¾î 
--- select: ¼±ÅÃÇÏ´Ù => ted ±×·ìÀÇ ³»¿ëÀ» ¼±ÅÃ
+-- scott ê³„ì • ì†Œìœ ì˜ í…Œì´ë¸” ëª©ë¡ ì¡°íšŒ
+-- sql: structured Query Language ë°ì´í„°ë² ì´ìŠ¤ ì ‘ê·¼ ì–¸ì–´ 
+-- select: ì„ íƒí•˜ë‹¤ => ted ê·¸ë£¹ì˜ ë‚´ìš©ì„ ì„ íƒ
 SELECT * FROM tab; 
--- table/ column: ¿­ (tableÀÇ ¿­À» º¸¿©Áà)
+-- table/ column: ì—´ (tableì˜ ì—´ì„ ë³´ì—¬ì¤˜)
 
--- Å×ÀÌºíÀÇ ±¸Á¶ 
-desc customer; -- desc: ³»¸²Â÷¼øÀ¸·Î Á¤·Ä 
--- gno: ¹®ÀÚ¿­ÀÇ ±æÀÌ, jumin: ÁÖ¹Î¹øÈ£
+-- í…Œì´ë¸”ì˜ êµ¬ì¡° 
+desc customer; -- desc: ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬ 
+-- gno: ë¬¸ìžì—´ì˜ ê¸¸ì´, jumin: ì£¼ë¯¼ë²ˆí˜¸
 SELECT gno, gname, jumin, point from customer;
--- professor Å×ÀÌºíÀÇ ÀüÃ¼ ¸ñ·Ï Á¶È¸
+-- professor í…Œì´ë¸”ì˜ ì „ì²´ ëª©ë¡ ì¡°íšŒ
 SELECT * from professor;
 
--- student Å×ÀÌºíÀÇ ÀüÃ¼¸ñ·Ï Á¶È¸
--- ±¸¹®ÀÌ ³¡³ª¸é ;¸¦ ÀÔ·ÂÇØ¾ß ¸í·É¾î°¡ ½ÇÇàÀÌ µÊ
--- || ¹®ÀÚ¿­ ¿¬°á ''´Â ¹®ÀÚ¿­ Ãß°¡
--- "" ¾Õ¿¡ °ªÀ» nameÀ¸·Î ÁöÁ¤ (alias: º°ÄªÁöÁ¤)
--- µû¿ÈÇ¥ ¾øÀÌ ¾²¸é ´ë¹®ÀÚ·Î Ç¥Çö µÊ (µû¿ÈÇ¥°¡ ÀÖÀ¸¸é ´ë¼Ò¹®ÀÚ ±¸ºÐ x)
+-- student í…Œì´ë¸”ì˜ ì „ì²´ëª©ë¡ ì¡°íšŒ
+-- êµ¬ë¬¸ì´ ëë‚˜ë©´ ;ë¥¼ ìž…ë ¥í•´ì•¼ ëª…ë ¹ì–´ê°€ ì‹¤í–‰ì´ ë¨
+-- || ë¬¸ìžì—´ ì—°ê²° ''ëŠ” ë¬¸ìžì—´ ì¶”ê°€
+-- "" ì•žì— ê°’ì„ nameìœ¼ë¡œ ì§€ì • (alias: ë³„ì¹­ì§€ì •)
+-- ë”°ì˜´í‘œ ì—†ì´ ì“°ë©´ ëŒ€ë¬¸ìžë¡œ í‘œí˜„ ë¨ (ë”°ì˜´í‘œê°€ ìžˆìœ¼ë©´ ëŒ€ì†Œë¬¸ìž êµ¬ë¶„ x)
 SELECT 'hello, ' || name as "name"
 FROM student; 
 
--- '''s': ¹®ÀÚ¿­¿¡ '¸¦ ³ªÅ¸³»´Â ¸í·É¾î 
--- ¿¬½À¹®Á¦ 1¹ø p.39 (ÇÐ»ýÀÇ ÀÌ¸§, ¾ÆÀÌµð, Ã¼ÁßÀ» ÇÑ ÁÙ¿¡ Ç¥Çö)
+-- '''s': ë¬¸ìžì—´ì— 'ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ëª…ë ¹ì–´ 
+-- ì—°ìŠµë¬¸ì œ 1ë²ˆ p.39 (í•™ìƒì˜ ì´ë¦„, ì•„ì´ë””, ì²´ì¤‘ì„ í•œ ì¤„ì— í‘œí˜„)
 SELECT name || '''s ID: ' || ID || ' weighr is ' || weight || 'kg' as "ID AND WELGHT"
 FROM student;
 
-select * from department; -- ÇÐ°ú
+select * from department; -- í•™ê³¼
 
--- distinct: Áßº¹°ªÀ» Á¦°ÅÇØ¼­ º¸¿©´Þ¶ó´Â°Í
--- °á°ú°ª¿¡ ºÎ¼­¹øÈ£¿Í ÀÌ¸§À» ¿¬°áÇØ¼­ º¸¿©ÁÖ´Â ¸í·É¾î
--- ,¸¦ ³ÖÀ¸¸é ºÐ¸®ÇØ¼­ º¸¿©ÁÖ°í ||¸¦ ¾²¸é ÇÏ³ªÀÇ ÄÃ·³À¸·Î Ã³¸®ÇÔ
-select ' ºÎ¼­¹øÈ£´Â' || deptno, ', ÀÌ¸§Àº ' || ename as "name with Dept" 
+-- distinct: ì¤‘ë³µê°’ì„ ì œê±°í•´ì„œ ë³´ì—¬ë‹¬ë¼ëŠ”ê²ƒ
+-- ê²°ê³¼ê°’ì— ë¶€ì„œë²ˆí˜¸ì™€ ì´ë¦„ì„ ì—°ê²°í•´ì„œ ë³´ì—¬ì£¼ëŠ” ëª…ë ¹ì–´
+-- ,ë¥¼ ë„£ìœ¼ë©´ ë¶„ë¦¬í•´ì„œ ë³´ì—¬ì£¼ê³  ||ë¥¼ ì“°ë©´ í•˜ë‚˜ì˜ ì»¬ëŸ¼ìœ¼ë¡œ ì²˜ë¦¬í•¨
+select ' ë¶€ì„œë²ˆí˜¸ëŠ”' || deptno, ', ì´ë¦„ì€ ' || ename as "name with Dept" 
 from emp
-order by ename; -- »ç¿ø / order by: µ¥ÀÌÅÍ¸¦ Á¤·ÄÇØ¼­ º¸¿©ÁÖ´Â °Í 
+order by ename; -- ì‚¬ì› / order by: ë°ì´í„°ë¥¼ ì •ë ¬í•´ì„œ ë³´ì—¬ì£¼ëŠ” ê²ƒ 
 
-select * from dept; -- ºÎ¼­Á¤º¸ 
+select * from dept; -- ë¶€ì„œì •ë³´ 
 
--- ¿¬½À¹®Á¦ 2¹ø (¸ðµç»ç¶÷ÀÇ ÀÌ¸§°ú Á÷¾÷À» Ãâ·Â)
+-- ì—°ìŠµë¬¸ì œ 2ë²ˆ (ëª¨ë“ ì‚¬ëžŒì˜ ì´ë¦„ê³¼ ì§ì—…ì„ ì¶œë ¥)
 select ename || '('||job||'), ' || ename || '''' || job || '''' as "NAME AND JOB" 
 from emp;
+

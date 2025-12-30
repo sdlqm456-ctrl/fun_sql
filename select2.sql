@@ -1,58 +1,58 @@
 SELECT ename
-    , sal "ÀÎ»óÀü ±Ş¿©"
-    , sal + comm "ÃÑ±Ş¿©"
-    ,  (sal + comm) * 1.1 as "ÀÎ»óµÈ ±Ş¿©(±Ş¿©+º¸³Ê½º)"
+    , sal "ì¸ìƒì „ ê¸‰ì—¬"
+    , sal + comm "ì´ê¸‰ì—¬"
+    ,  (sal + comm) * 1.1 as "ì¸ìƒëœ ê¸‰ì—¬(ê¸‰ì—¬+ë³´ë„ˆìŠ¤)"
 FROM emp
--- Á¶°ÇÀÌ ÀÖÀ»¶§ 
+-- ì¡°ê±´ì´ ìˆì„ë•Œ 
 
--- salÀÇ °ªÀÌ 3000 º¸´Ù ÀÛÀ»¶§ 
+-- salì˜ ê°’ì´ 3000 ë³´ë‹¤ ì‘ì„ë•Œ 
 WHERE sal < 3000
-AND job = 'SALESMAN'; -- Á¶°ÇÀı (where) ÀÛ¼º
+AND job = 'SALESMAN'; -- ì¡°ê±´ì ˆ (where) ì‘ì„±
 ORDER BY ename desc;
--- salÀÇ °ªÀÌ 2000 º¸´Ù ÀÛÀ»¶§
+-- salì˜ ê°’ì´ 2000 ë³´ë‹¤ ì‘ì„ë•Œ
 SELECT
     * FROM emp
     WHERE sal > 2000
-    OR job = 'SALESMAN'; -- AÁ¶°Ç ÀÌ°Å³ª B Á¶°Ç Áß¿¡ ¼±ÅÃ¿¡¼­ °¡Á®¿À±â
+    OR job = 'SALESMAN'; -- Aì¡°ê±´ ì´ê±°ë‚˜ B ì¡°ê±´ ì¤‘ì— ì„ íƒì—ì„œ ê°€ì ¸ì˜¤ê¸°
     
--- 2000 ~ 3000»çÀÌÀÇ °ªÀ» °¡Á®¿À¶ó´Â ¸í·É¾î  
+-- 2000 ~ 3000ì‚¬ì´ì˜ ê°’ì„ ê°€ì ¸ì˜¤ë¼ëŠ” ëª…ë ¹ì–´  
 -- where sal between 2000 and 3000 order by sal
 
 SELECT * 
 From emp
--- 81³â ~ 82³â »çÀÌ ÀÔ»çÇÑ »ç¶÷À» Ã£¾Æ ¿À±â (hiredate: ÀÔ»çÀÏ)
+-- 81ë…„ ~ 82ë…„ ì‚¬ì´ ì…ì‚¬í•œ ì‚¬ëŒì„ ì°¾ì•„ ì˜¤ê¸° (hiredate: ì…ì‚¬ì¼)
 WHERE hiredate between '81/01/01' AND '82/12/31'
 order by hiredate;
 -- WHERE sal <= 3000
 -- and sal >= 2000
 
--- in (a, b, c) ¿¬»êÀÚ
--- deptno: ºÎ¼­¹øÈ£ 
+-- in (a, b, c) ì—°ì‚°ì
+-- deptno: ë¶€ì„œë²ˆí˜¸ 
 SELECT
     * FROM emp
-    WHERE deptno in (10, 20) -- deptno >= 10 and deptno <= 20 : 10¹øº¸´Ù Å©°í 20¹øº¸´Ù Å©°Å³ª ÀÛÀº °ªÀ» °¡Áö°í ¿Â´Ù
-    and ename not in ('SMITH', 'FORD'); -- not in: 'SMITH', 'FORD'¸¦ Á¦¿ÜÇÑ ¸ğµÎ¸¦ °¡Áö°í ¿È 
+    WHERE deptno in (10, 20) -- deptno >= 10 and deptno <= 20 : 10ë²ˆë³´ë‹¤ í¬ê³  20ë²ˆë³´ë‹¤ í¬ê±°ë‚˜ ì‘ì€ ê°’ì„ ê°€ì§€ê³  ì˜¨ë‹¤
+    and ename not in ('SMITH', 'FORD'); -- not in: 'SMITH', 'FORD'ë¥¼ ì œì™¸í•œ ëª¨ë‘ë¥¼ ê°€ì§€ê³  ì˜´ 
     
--- is null/ is not null (null: °ªÀÌ ¾ø´Â)
+-- is null/ is not null (null: ê°’ì´ ì—†ëŠ”)
 select * 
 from emp
-WHERE comm is not null; -- (null)À» Á¦¿ÜÇÑ °ªÀÌ ÀÖ´Â °É °¡Áö°í ¿À´Â °Í
+WHERE comm is not null; -- (null)ì„ ì œì™¸í•œ ê°’ì´ ìˆëŠ” ê±¸ ê°€ì§€ê³  ì˜¤ëŠ” ê²ƒ
 
 -- like (= )
 SELECT
     * FROM emp
-    where ename like '%_LA%'; -- % =>%LA%: ±ÛÀÚ¼ö Á¦ÇÑx, ¾î¶² ±ÛÀÚ°¡ ¿Íµµ »ó°ü¾øÀ½, LA¸¦ Æ÷ÇÔÇÑ ¸ğµç °É °¡ÀÚ°í ¿È 
-                              -- clark, cla % (¾ø°Å³ª ÇÑ±ÛÀÚ ÀÌ»ó)/ _ => ÇÑ±ÛÀÚ ÀÌ»ó¿¡ ´ëÀÀ   
+    where ename like '%_LA%'; -- % =>%LA%: ê¸€ììˆ˜ ì œí•œx, ì–´ë–¤ ê¸€ìê°€ ì™€ë„ ìƒê´€ì—†ìŒ, LAë¥¼ í¬í•¨í•œ ëª¨ë“  ê±¸ ê°€ìê³  ì˜´ 
+                              -- clark, cla % (ì—†ê±°ë‚˜ í•œê¸€ì ì´ìƒ)/ _ => í•œê¸€ì ì´ìƒì— ëŒ€ì‘   
 SELECT * 
-FROM professor -- primary key (Áßº¹x)
+FROM professor -- primary key (ì¤‘ë³µx)
 where deptno in (101, 103)
 AND position not in ('a full professor')
 ;
 
--- º¸³Ê½ºÀÇ °ªÀÌ 300 º¸´Ù Å©°Å³ª °°°í º¸³Ê½º¿Í pay¸¦ ´õÇÑ °ªÀÌ 300º¸´Ù Å©°Å³ª °°Àº °æ¿ì 
+-- ë³´ë„ˆìŠ¤ì˜ ê°’ì´ 300 ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ê³  ë³´ë„ˆìŠ¤ì™€ payë¥¼ ë”í•œ ê°’ì´ 300ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì€ ê²½ìš° 
 SELECT
     * FROM professor 
-    where pay + nvl(bonus, 0) >= 300; -- bonusÀÇ °ªÀ» nvl·Î ÁöÁ¤, 0À¸·Î °£ÁÖÇÏ°í 300ÀÌ»óÀÇ °ªÀ» °¡Áö°í ¿À°Ú´Ù
+    where pay + nvl(bonus, 0) >= 300; -- bonusì˜ ê°’ì„ nvlë¡œ ì§€ì •, 0ìœ¼ë¡œ ê°„ì£¼í•˜ê³  300ì´ìƒì˜ ê°’ì„ ê°€ì§€ê³  ì˜¤ê² ë‹¤
     -- where (bonus is null and pay >= 300)
     -- or (pay + bonus >= 300);
 -- where bonus is not null;
@@ -62,7 +62,6 @@ SELECT
 SELECT
     * FROM department;
    
-    
 
     
 
