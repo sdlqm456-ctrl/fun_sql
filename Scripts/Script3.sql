@@ -195,116 +195,113 @@ select deptno1
 FROM student;
 
 SELECT * FROM tab;
-
--- 이름, 주민번호 
-
--- 연습문제 p.120: 주민번호로 성별을 나타내기 => 뒷자리가 1이면 남자, 2면 여자
-SELECT name 
-      ,JUMIN 
-      ,decode (substr (jumin, 7, 1), 1, 'man', 2, 'woman') "gender"
--- case when then 구문으로 변경 
-      ,CASE substr (jumin, 7, 1) WHEN '1' THEN 'man'
-      							 WHEN '2' THEN 'woman'
-       END "gender2"
+-- 연습문제 p.120: 전공번호 101의 학생들의 이름 + 주민번호 성별 판별 (뒷자리 1 = 남자, 2 = 여자)
+SELECT name
+	  ,jumin
+	  ,decode(substr(jumin, 7, 1), 1,'man', 2, 'woman') "gender"
+-- case when then end 구문으로 변경
+	  ,CASE substr(jumin, 7, 1) WHEN '1' THEN 'man'
+	  	        				WHEN '2' THEN 'woman'
+	   END "gender2"
 FROM student
 WHERE deptno1 = 101;
 
--- 연습문제 p.120: 학생의 이름과, 지역번호 나타내기
+-- 연습문제 p.120: 전공번호 101의 학생이름 + 연락처 + 지역 출력하기
 SELECT name 
-	  ,tel
-      ,decode(substr(tel, 1, instr(tel, ')', 1) -1) -- 판별할값  
-      ,'02', 'seoul' 
-      ,'031', 'gyeonggl'
-      ,'051', 'busan'   
-      ,'052', 'ulsan'
-      ,'055', 'gyeongnam'
-      ,'etc') loc
--- case (컬럼) when (조건) then (출력) 구문 => 마지막 end (컬럼명) : case 구문은 ,를 쓰지 않음
-      ,CASE substr(tel, 1, instr(tel, ')', 1) -1) WHEN '02' THEN 'seoul'
-      											  WHEN '031' THEN 'gyeonggl'
-      											  WHEN '051' THEN 'busan'
-      											  WHEN '052' THEN 'ulsan'
-      											  WHEN '055' THEN 'gyeongnam'
-      											  ELSE 'etc' -- 이외의 조건 외 나머지
-       END loc2
+	  ,decode (substr(tel, 1, instr(tel, ')', 1) -1)
+	  ,'02', 'seoul' 
+	  ,'031', 'gyeonggl'
+	  ,'051', 'busan'
+	  ,'052', 'ulsan'
+	  ,'055', 'gyeongnam'
+	  ,'etc') loc
+-- case (컬럼) when (조건) then (출력) 구문 end (컬럼명): case 구문은 ,를 쓰지 않음
+	  ,CASE substr(tel, 1, instr(tel, ')', 1) -1) WHEN '02' THEN 'seoul'
+	  											  WHEN '031' THEN 'gyeonggl'
+	  											  WHEN '051' THEN 'busan'
+	  											  WHEN '052' THEN 'ulsan'
+	  											  WHEN '055' THEN 'gyeongnam'
+	  											  else 'etc'
+	  END loc2  											  
 FROM student
--- WHERE deptno1 = 101
-;
+WHERE deptno1 = 101;
 
--- cace 구문을 활용 => 조건의 범위를 지정
--- 1월 ~ 3월 => 1/4, 4월 ~ 6월 => 2/4 .....10월 ~12월 => 4/4로 표현
-select NAME 
-	  ,substr(JUMIN, 3,2) "Month"
+-- case 구문활용: 조건의 범위를 지정
+-- 1월 ~ 3월 (1/4), 4월 ~ 6월 (2/4) ....10월 ~ 12월 (4/4)
+select name 
+	  ,substr(jumin, 3,2) "Month"
 	  ,CASE when substr(jumin, 3,2) BETWEEN '01' AND '03' THEN '1/4'
 	  		when substr(jumin, 3,2) BETWEEN '04' AND '06' THEN '2/4'
 	  		when substr(jumin, 3,2) BETWEEN '07' AND '09' THEN '3/4'
 	  		when substr(jumin, 3,2) BETWEEN '10' AND '12' THEN '4/4'
 	  END "Quater"
 FROM student;
--- 연습문제 p.123: 사원들의 급여 등급별로 level 테그 넣기
+
+-- 연습문제 p.123: 사원의 급여를 등급별 level로 표시
+-- order by 칼럼명 desc: 내림차순 정렬 / desc 없이 쓰는경우는 오름차순 정렬
 SELECT empno 
-	  ,ename 
+	  ,ename
 	  ,sal
-	  ,CASE WHEN sal BETWEEN 1 AND 1000 THEN 'level 1'
-	  	   WHEN sal BETWEEN 1001 AND 2000 THEN 'level 2'
-	  	   WHEN sal BETWEEN 2001 AND 3000 THEN 'level 3'
-	  	   WHEN sal BETWEEN 3001 AND 4000 THEN 'level 4'
-	  	   ELSE 'level 5'
-	  END "level"
+	  ,CASE WHEN sal BETWEEN '1' AND '1000' THEN 'level 1'
+	  	    WHEN sal BETWEEN '1001' AND '2000' THEN 'level 2'
+	  	    WHEN sal BETWEEN '2001' AND '3000' THEN 'level 3'
+	  	    WHEN sal BETWEEN '3001' AND '4000' THEN 'level 4'
+	  	    ELSE 'level 5'
+	  	END "level"
 FROM emp
 ORDER BY sal desc;
 
--- 복수행함수 (데이터를 그룹으로 묶음: group함수)
--- count: 데이터의 총 건수, sum: 입력 데이터의 합계
--- 그룹외의 값을 select에 적으면 에러가 날수 있어서 꼭 그룹함수로 묶어야 함
-SELECT deptno, ename,count(*) "인원", sum(sal) "부서별 급여"
+-- 복수행 함수(group함수): 데이터를 그룹으로 묶음, 그룹외의 값을 적으면 x 
+-- count(): 입력데이터의 총 건수 반환 /count(*): null값 포함 전체/ count(comm): null값 제외
+-- sum(): 입력데이터의 합계 
+SELECT deptno, ename, count(*) "인원", SUM(sal) "부서별 급여" 
 FROM emp
-GROUP by deptno, ename; -- 부서번호별 그룹
+GROUP BY deptno, ename; -- 부서번호별 그룹
 
--- emp 테이블
--- group by : 데이터를 가져와서 그룹을 생성
--- round: 소수점아래 반올림함수
--- * : 전체 칼럼 => 값이 null인 값도 있기 때문에 전체를 가져와서 표현 / count(숫자) =>출력되는 컬럼에서 숫자를 기준으로 가져옴
+-- group by 함수: 특정조건으로 세부적인 그룹을 만드는 함수
+-- round: 소수점 아래부터 반올림
+-- count(1): 모든 행 
 SELECT deptno, job
-	  ,count(1) "건수"
-	  ,sum(sal +nvl (comm, 0)) "직무별 급여합계"
-	  ,round(sum(sal +nvl (comm, 0)) / count(1)) "직무별 평균급여"
-	  ,round(avg(sal + nvl(comm,0))) "직무별 평균급여1"
-	  ,min(sal+ nvl(comm, 0)) "최저급여"
-	  ,max(sal+ + nvl(comm, 0)) "최고급여"
+	  ,count(1) "건수" -- 1을 기준으로 count
+	  ,sum(sal + nvl(comm, 0)) "직무별 급여합계"
+	  ,round(sum(sal + nvl(comm, 0)) / count(1)) "직무별 평균급여"
+	  ,round(avg(sal + nvl(comm, 0))) "직무별 평균급여1"
+	  ,min(sal + nvl(comm, 0)) "최저급여"
+	  ,max(sal + nvl(comm, 0)) "최고급여"
 	  -- ,stddev(sal) "표준편차"
-	  -- ,Variance(sal) "분산"
+	  -- ,variance(sal) "분산"
 FROM emp
-GROUP BY deptno, JOB; -- 부서, 직무
+GROUP BY deptno, job; -- 부서, 직무
 
 -- 직무별 그룹
 SELECT job
 	  ,sum(sal)
 	  ,round(avg(sal)) "직무별 평균급여"
 FROM emp
--- WHERE sal > 1500 -- where절 조건문
-GROUP BY job -- where절 조건문: 그룹함수를 비교조건으로 사용x
-HAVING round(avg(sal)) > 1500; -- having절 조건문: 그룹안에 조건으로 검색하기
+-- where sal > 1500 where절 조건문 
+GROUP BY job 
+-- having: 그룹별 집계된 결과중 원하는 조건의 결과만 알고싶을때 사용
+HAVING round(avg(sal)) > 1500;
 
-SELECT ename, job, hiredate  
+SELECT ename, job, hiredate
 FROM emp
-ORDER BY 3 desc; -- 출력되는 컬럼에서  1번
+ORDER BY 3 desc; -- 출력되는 컬럼 중 1번
 
--- 부서/직무/정보조회(평균급여, 사원수 등)
+-- 부서,직무,정보조회(평균급여, 사원수 등)
 -- 1. 부서별 직무별 평균급여, 사원수
 SELECT deptno || '', job, avg(sal), count(1)
 FROM emp
 GROUP BY deptno, job
--- 2. 부서별 평균급여, 사원수 
+-- 2. 부서별 평균급여, 사원수
 UNION all
-SELECT deptno || '','소계', round(avg(sal)), count(1)
+SELECT deptno || '', '소계', round(avg(sal)), count(1)
 FROM emp
 GROUP BY deptno
 -- 3. 전체평균급여, 사원수
-UNION ALL 
-SELECT '전체', '', round(avg(sal)), count(1)
+UNION ALL
+SELECT '전체', '',round(avg(sal)), count(1)
 FROM emp
-ORDER BY 1, 2;
+ORDER BY 1,2;
 
 -- rollup 함수: 그룹간의 합계 계산
 SELECT nvl(deptno || '','전체') dept
@@ -410,7 +407,7 @@ FROM emp2 e
 JOIN p_grade p ON trunc(months_between(sysdate, birthday) /12) BETWEEN p.s_age AND p.e_age;
 -- 아우터 조인 (outer join) vs 이너 조인 (inner join) p.243 연습문제: 
 -- inner join: 각 테이블에서 동등한 조건이 있을때 원하는 칼럼을 가져옴 => 반드시 컬럼명이 같아야 함 
--- 아우터 조인: inner 조인에서 원하는 부분 추가로 가져오는 방법 => left,rigth,full
+-- outer join: inner 조인에서 원하는 부분 추가로 가져오는 방법 => left,rigth,full
 -- left outer join: 왼쪽 테이블의 데이터를 추가로 가져옴 / rigth : 각 테이블 사이 동일하지 않은 데이터 가져오기
 -- full outer join: null 값까지 모두 보여줌
 SELECT s.studno "학번"
@@ -435,14 +432,31 @@ FROM emp e1
 LEFT OUTER JOIN emp e2 ON e1.mgr = e2.empno;
 
 SELECT * FROM customer;
+
 -- p. 255 연습문제 4: 고객의 포인트 보다 낮은 포인트의 gift 상품 한가지 선택시 노트북을 선택할 수 있는 고객명, 포인트, 상품명 출력 
 SELECT c.GNAME 
-	  ,c.point
-	  ,g.gname
+	  ,c.POINT
+	  ,g.GNAME
 FROM customer c
-JOIN  CUSTOMER ON c.point BETWEEN g.g_start AND g.g_end;
+LEFT OUTER JOIN  gift ON c.POINT = g.GNAME;
 
 SELECT * FROM gift;
 
+-- p. 256 연습문제 5: 교수의 번호, 이름, 입사일 출력 (입사일이 빠른사람 오름차순 출력)
+
+SELECT profno 
+	  ,name
+	  ,round(avg(hiredate))  
+FROM professor
+HAVING round(avg(hiredate)) > hiredate
+ORDER BY hiredate dece;
+
+-- p. 257 연습문제 6: 사원번호, 이름, 입사일 (자신보다 먼저 입사한 사람의 인원수) 출력
+
+SELECT empno 
+	  ,ename
+	  ,hiredate
+FROM emp
+ORDER BY hiredate dece;
 
 
