@@ -455,34 +455,29 @@ HAVING round(avg(hiredate)) > hiredate
 ORDER BY hiredate desc;
 
 -- p. 257 연습문제 6: 사원번호, 이름, 입사일 (자신보다 먼저 입사한 사람의 인원수) 출력
-
--- ansl join으로 표현
-SELECT  e1.empno
-	   ,e1.ename
-	   ,e1.hiredate
-	-- e2.정보
-	-- e2.empno
-	-- e2.ename
-	-- ,e2.hiredate
-	   ,count(e2.empno) count
-from emp e1, emp e2
+--ansl join 표현법
+SELECT e1.empno 
+	  ,e1.ename
+	  ,e1.hiredate
+	  ,count(e2.empno) AS count
+FROM emp e1
 LEFT OUTER JOIN emp e2
-ON e1.hiredate > e2.HIREDATE  
-GROUP BY e1.EMPNO 
+ON e1.hiredate > e2.hiredate
+GROUP BY e1.empno
 		,e1.ename
-		,e1.HIREDATE 
+		,e1.hiredate
 ORDER BY 4;
 
--- oracle의 outer join 표현 방법
-SELECT  e1.empno
-	   ,e1.ename
-	   ,e1.hiredate
-	   ,count(e2.empno) count
-from emp e1, emp e2
-where e1.HIREDATE > e2.HIREDATE(+) 
-GROUP BY e1.EMPNO 
+-- oracle join 표현법
+SELECT e1.empno 
+	  ,e1.ename
+	  ,e1.hiredate
+	  ,count(e2.empno) AS count
+FROM emp e1, emp e2
+where e1.hiredate > e2.hiredate(+)
+GROUP BY e1.empno
 		,e1.ename
-		,e1.HIREDATE 
+		,e1.hiredate
 ORDER BY 4; 
 
 
