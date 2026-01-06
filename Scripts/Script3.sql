@@ -441,27 +441,48 @@ SELECT c.GNAME
 	  ,c.POINT
 	  ,g.GNAME
 FROM customer c
-LEFT OUTER JOIN  gift ON c.POINT = g.GNAME;
+JOIN gift g
+ON c.POINT BETWEEN g.G_START AND G_END
+WHERE g.GNAME = 'Notebook';
 
 SELECT * FROM gift;
-
+SELECT * FROM customer;
 -- p. 256 연습문제 5: 교수의 번호, 이름, 입사일 출력 (입사일이 빠른사람 오름차순 출력)
 
-SELECT profno 
-	  ,name
-	  ,round(avg(hiredate))  
-FROM professor
-HAVING round(avg(hiredate)) > hiredate
-ORDER BY hiredate desc;
+-- ansl join 구문
+SELECT p1.profno
+	  ,p1.name
+	  ,p1.hiredate
+	  ,count(p2.profno) AS count
+FROM professor p1
+LEFT OUTER JOIN professor p2
+ON p1.hiredate > p2.hiredate
+GROUP BY p1.profno
+	  	,p1.name
+	  	,p1.hiredate
+ORDER BY 4;
+
+-- oracle join 표현법
+SELECT p1.profno
+	  ,p1.name
+	  ,p1.hiredate
+	  ,count(p2.profno) AS count
+FROM professor p1, professor p2
+where p1.hiredate > p2.hiredate(+)
+GROUP BY p1.profno
+	  	,p1.name
+	  	,p1.hiredate
+ORDER BY 4;
 
 -- p. 257 연습문제 6: 사원번호, 이름, 입사일 (자신보다 먼저 입사한 사람의 인원수) 출력
+
 --ansl join 표현법
 SELECT e1.empno 
 	  ,e1.ename
 	  ,e1.hiredate
 	  ,count(e2.empno) AS count
-FROM emp e1
-LEFT OUTER JOIN emp e2
+FROM emp e1 -- 기준
+LEFT OUTER JOIN emp e2 -- 비교대상
 ON e1.hiredate > e2.hiredate
 GROUP BY e1.empno
 		,e1.ename
@@ -479,5 +500,3 @@ GROUP BY e1.empno
 		,e1.ename
 		,e1.hiredate
 ORDER BY 4; 
-
-
