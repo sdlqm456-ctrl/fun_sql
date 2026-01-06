@@ -405,11 +405,14 @@ SELECT NAME
 	  ,p.POSITION be_position
 FROM emp2 e
 JOIN p_grade p ON trunc(months_between(sysdate, birthday) /12) BETWEEN p.s_age AND p.e_age;
--- 아우터 조인 (outer join) vs 이너 조인 (inner join) p.243 연습문제: 
+-- 아우터 조인 (outer join) vs 이너 조인 (inner join)  
 -- inner join: 각 테이블에서 동등한 조건이 있을때 원하는 칼럼을 가져옴 => 반드시 컬럼명이 같아야 함 
 -- outer join: inner 조인에서 원하는 부분 추가로 가져오는 방법 => left,rigth,full
 -- left outer join: 왼쪽 테이블의 데이터를 추가로 가져옴 / rigth : 각 테이블 사이 동일하지 않은 데이터 가져오기
 -- full outer join: null 값까지 모두 보여줌
+
+-- p.243 연습문제: 학생 + 교수테이블을 join하여 학생이름 + 교수이름 출력하기 (지도교수가 없는 사람도 출력)
+
 SELECT s.studno "학번"
 	  ,s.name "학생이름"
 	  ,p.profno "교수번호"
@@ -449,14 +452,37 @@ SELECT profno
 	  ,round(avg(hiredate))  
 FROM professor
 HAVING round(avg(hiredate)) > hiredate
-ORDER BY hiredate dece;
+ORDER BY hiredate desc;
 
 -- p. 257 연습문제 6: 사원번호, 이름, 입사일 (자신보다 먼저 입사한 사람의 인원수) 출력
 
-SELECT empno 
-	  ,ename
-	  ,hiredate
-FROM emp
-ORDER BY hiredate dece;
+-- ansl join으로 표현
+SELECT  e1.empno
+	   ,e1.ename
+	   ,e1.hiredate
+	-- e2.정보
+	-- e2.empno
+	-- e2.ename
+	-- ,e2.hiredate
+	   ,count(e2.empno) count
+from emp e1, emp e2
+LEFT OUTER JOIN emp e2
+ON e1.hiredate > e2.HIREDATE  
+GROUP BY e1.EMPNO 
+		,e1.ename
+		,e1.HIREDATE 
+ORDER BY 4;
+
+-- oracle의 outer join 표현 방법
+SELECT  e1.empno
+	   ,e1.ename
+	   ,e1.hiredate
+	   ,count(e2.empno) count
+from emp e1, emp e2
+where e1.HIREDATE > e2.HIREDATE(+) 
+GROUP BY e1.EMPNO 
+		,e1.ename
+		,e1.HIREDATE 
+ORDER BY 4; 
 
 
