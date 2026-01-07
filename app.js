@@ -11,17 +11,20 @@ app.get("/", (req, res) => {
   // 요청정보,웹페이지 정보 (실행함수)
   res.send("/장수연 홈에 오신걸 환영합니다"); // 웹페이지에 ( )안 내용을 출력해서 보여줌 => 라우팅 정보
 });
-// "/custmer"
-app.get("/custmer", (req, res) => {
-  // 요청정보,웹페이지 정보
-  res.send("/custmer 경로가 호출됨");
-});
-// "/product"
-app.get("/product", (req, res) => {
-  // 요청정보,웹페이지정보
-  res.send("/product 경로가 호출됨");
-});
 
+// 제약조건 오류 생성
+app.get("/add_board", async (req, res) => {
+  const qry = `INSERT into board (board_no, title, content, writer)
+              VALUES(6,'test', 'content', 'user01')`;
+  try {
+    const connection = await db.getConnection();
+    const result = await connection.execute(qry);
+    req.send("처리완료");
+  } catch (err) {
+    console.log(err);
+    res.send("처리중 에러");
+  }
+});
 // "/student" -> 화면에 출력
 app.get("/student/:studno", async (req, res) => {
   console.log(req.params.studno);
