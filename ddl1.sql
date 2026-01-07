@@ -76,11 +76,11 @@ WHERE profno = 1001;
 -- board
 SELECT * FROM board;
 
--- 5번글 제목: 게시글 연습입니다. 내용: 신규글을 등록합니다. user01 => 등록
+-- 글번호: 5,  제목: 게시글 연습입니다. 내용: 신규글을 등록합니다. user01 => 등록
 INSERT INTO board (title, content, writer, board_no)
 values('게시글 연습입니다', '신규글을 등록합니다', 'user01', 5);
 
--- 5번글 제목: 게시글 수정입니다. 내용: 신규글을 수정합니다 => 수정 
+-- 글번호: 5, 제목: 게시글 수정입니다. 내용: 신규글을 수정합니다 => 수정 
 UPDATE board 
 SET title = '게시글 수정입니다'
    ,content = '신규글을 수정합니다'
