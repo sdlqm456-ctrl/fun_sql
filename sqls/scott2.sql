@@ -30,3 +30,5 @@ VALUES ('신규회원등록관련', '신규회원 아이디는 50글자 미만�
 
 insert into board (title, content, writer, board_no)
 VALUES ('2026년도 프로야구 개막일까지 85일','신규회원 아이디는 50글자 미만으로 작성해주세요','admin',3);
+
+delete from board where board_no = 2;
