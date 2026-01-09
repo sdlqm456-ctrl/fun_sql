@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>체크리스트</title>
+    <link href="css/체크리스트.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <h2>여행준비물 점검목록</h2>
+      <form>
+        <tr>
+          <input type="text" id="item" name="item" autofocus />
+          <td>
+            <button type="button" id="add" name="add" class="addBtn">
+              추가
+            </button>
+          </td>
+        </tr>
+      </form>
+      <div id="itemList">
+        <ul>
+          <li>abc <span class="close">삭제</span></li>
+          <li>ddd <span class="close">삭제</span></li>
+        </ul>
+      </div>
+    </div>
+    <script src="js/체크리스트.js"></script>
+  </body>
+</html>
