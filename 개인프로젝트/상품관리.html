@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>000편의점 000점 상품관리창</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 검은색 창업 문의 배너 -->
+    <div class="notice">
+      000편의점 창업 문의 번호: 010-1234-1234
+      <button onclick="this.parentElement.style.display='none'">X</button>
+    </div>
+
+    <!-- 헤더 영역: 노란색 배경에 이미지 + 제목 -->
+    <header class="header">
+  <div class="title-box">
+    <img src="img/logo.png" alt="편의점 로고" class="logo">
+    <h1>000편의점 000점 상품관리창</h1>
+  </div>
+</div>
+  <div class="search-tab-area">
+    <div class="search-area">
+      <input type="text" placeholder="상품명 또는 상품번호 검색">
+      <button>검색</button>
+    </div>
+
+    <div class="tab-buttons">
+      <button data-tab="popular">인기상품</button>
+      <button data-tab="stock">재고현황</button>
+      <button data-tab="reserve">예약상품</button>
+    </div>
+  </div>
+</header>
+
+    <!-- 인기상품 -->
+    <section id="popular" class="content-section">
+      <h2>우리 점포 인기상품</h2>
+      <table>
+        <tr>
+          <th>상품번호</th>
+          <th>상품종류</th>
+          <th>상품이름</th>
+          <th>사진</th>
+          <th>가격</th>
+          <th>판매량</th>
+          <th>발주가능</th>
+        </tr>
+        <tr>
+          <td>1001</td>
+          <td>김밥류</td>
+          <td>삼각김밥</td>
+          <td><img src="img/kimbap.jpg" /></td>
+          <td>1,500원</td>
+          <td>120</td>
+          <td class="ok">O</td>
+        </tr>
+      </table>
+    </section>
+    <!-- 재고현황 -->
+    <section id="stock" class="content-section">
+      <h2>재고현황</h2>
+      <table>
+        <tr>
+          <th>상품번호</th>
+          <th>상품종류</th>
+          <th>제품이름</th>
+          <th>사진</th>
+          <th>가격</th>
+          <th>재고현황</th>
+        </tr>
+        <tr>
+          <td>2001</td>
+          <td>라면</td>
+          <td>컵라면</td>
+          <td><img src="img/ramen.jpg" /></td>
+          <td>1,200원</td>
+          <td>30</td>
+        </tr>
+      </table>
+    </section>
+    <!-- 예약상품 -->
+    <section id="reserve" class="content-section">
+      <h2>예약상품</h2>
+      <table>
+        <tr>
+          <th>상품번호</th>
+          <th>상품종류</th>
+          <th>예약제품이름</th>
+          <th>사진</th>
+          <th>예약자</th>
+          <th>픽업여부</th>
+        </tr>
+        <tr>
+          <td>3001</td>
+          <td>도시락</td>
+          <td>제육도시락</td>
+          <td><img src="img/lunchbox.jpg" /></td>
+          <td>홍길동</td>
+          <td class="no">NO</td>
+        </tr>
+      </table>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

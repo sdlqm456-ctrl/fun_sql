@@ -1,0 +1,165 @@
+/* 기본 스타일 */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
+/* 검은색 배너 */
+.notice {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.notice button {
+  margin-left: 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+}
+
+/* 헤더 - 노란색 배경과 중앙 정렬 */
+.header {
+  padding: 15px 20px;
+  text-align: center;
+  background: transparent;
+}
+
+/* 제목 박스: 이미지와 글자 가로 정렬, 세로 중앙 */
+.title-box {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+  gap: 15px;
+  justify-content: center;
+  background-color: #719fca; /* 🔹 여기에 배경 이동 */
+  padding: 10px 20px; /* 🔹 노란색 영역 넓히기 */
+}
+
+/* 로고 이미지 크기 */
+.logo {
+  width: 50px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* 제목 스타일 */
+.title-box h1 {
+  display: inline;
+  padding: 5px 10px; /* 🔹 글자 주변 여백 */
+  margin: 0; /* 🔹 h1 기본 margin 제거 */
+  font-size: 30px;
+  line-height: 1;
+  color: black;
+}
+
+/* 검색창 중앙 정렬 및 스타일 */
+.search-area {
+  margin: 15px auto 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.search-area input {
+  padding: 8px;
+  width: 250px;
+  font-size: 16px;
+}
+
+.search-area button {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* 버튼 영역 */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.tab-buttons button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #eee;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.tab-buttons button:hover {
+  background-color: #ccc;
+}
+/* 내용 섹션 기본 숨김 */
+.content-section {
+  background: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+/* 탭 메뉴 */
+.tab-menu {
+  text-align: center;
+  margin: 20px;
+}
+
+.tab-menu button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: none;
+  background: #e0e0e0;
+  font-weight: bold;
+}
+
+/* 내용 섹션 */
+.content-section {
+  display: none;
+  background: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.content-section h2 {
+  margin-bottom: 15px;
+}
+
+/* 테이블 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: #eeeeee;
+}
+
+td img {
+  width: 60px;
+}
+
+/* 상태 표시 */
+.ok {
+  color: green;
+  font-weight: bold;
+}
+
+.no {
+  color: red;
+  font-weight: bold;
+}
