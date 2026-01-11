@@ -32,5 +32,9 @@ document.querySelector("#add").addEventListener("click", (e) => {
   // list 항목에 item 값 => hello, world
 
   // 4. 삭제표시 클릭시 목록 제거 , 화면표시 X
-  console.log(list);
+  span.addEventListener("click", () => {
+    list.list.splice(index, 1);
+    render();
+  });
 });
+
