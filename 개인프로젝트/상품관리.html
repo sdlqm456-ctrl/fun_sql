@@ -21,9 +21,6 @@
       <a href="#reserve" class="tab">예약상품</a>
     </nav>
 
-    <!-- 탭 밑 안내 문구 -->
-    <p class="tab-guide">탭을 클릭하여 상품 정보를 확인하세요</p>
-
     <section id="searchResult" class="content default">
       <!--- 검색창 입력 부분 + 검색버튼 -->
       <div class="search-section">
@@ -35,25 +32,37 @@
         />
         <button id="searchBtn">검색</button>
       </div>
-      <!--검색결과-->
-      <table border="1">
-        <thead>
-          <tr>
-            <th>상품번호</th>
-            <th>상품종류</th>
-            <th>상품이름</th>
-            <th>사진</th>
-            <th>가격(원)</th>
-          </tr>
-        </thead>
-        <tbody id="productBody">
-          <tr>
-            <td colspan="5">검색 결과가 여기에 표시됩니다.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="main-wrap">
+        <aside id="left_aside">
+          <h3>배너광고</h3>
+          <p>
+            000편의점 NEW 신상품 출시 화제의 두바이 쫀득쿠키 수량제한 입고
+            점포당 20개 한정! (( ง´°ω°*=͟͟͞))ว 입고문의 ☎ 1555-2222
+          </p>
+        </aside>
+        <!--검색결과-->
+        <div class="main-content">
+          <table border="1">
+            <thead>
+              <h3>검색결과</h3>
+              <tr>
+                <th>상품번호</th>
+                <th>상품종류</th>
+                <th>상품이름</th>
+                <th>가격(원)</th>
+                <th>재고</th>
+              </tr>
+            </thead>
+            <tbody id="productBody">
+              <tr>
+                <td colspan="5">검색 결과가 여기에 표시됩니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
-    <!-- 인기상품 -->
+    <!-- 우리점포 인기상품 -->
     <section id="popular" class="content">
       <table>
         <tr>
@@ -63,7 +72,7 @@
           <th>사진</th>
           <th>판매량</th>
           <th>가격(원)</th>
-          <th>발주가능</th>
+          <th>발주</th>
         </tr>
         <tr>
           <td>1001</td>
@@ -74,7 +83,9 @@
           </td>
           <td>150</td>
           <td>1,200</td>
-          <td class="status-ok">O</td>
+          <td class="status-ok">
+            <button class="btn btn-success">발주하기</button>
+          </td>
         </tr>
         <tr>
           <td>1002</td>
@@ -85,7 +96,9 @@
           </td>
           <td>70</td>
           <td>1,200</td>
-          <td class="status-ok">O</td>
+          <td class="status-ok">
+            <button class="btn btn-success">발주하기</button>
+          </td>
         </tr>
         <tr>
           <td>1003</td>
@@ -96,7 +109,9 @@
           </td>
           <td>100</td>
           <td>1,600</td>
-          <td class="status-ok">X</td>
+          <td class="status-no">
+            <button class="btn btn-danger">발주불가</button>
+          </td>
         </tr>
         <tr>
           <td>105</td>
@@ -107,7 +122,9 @@
           </td>
           <td>250</td>
           <td>1,600</td>
-          <td class="status-ok">X</td>
+          <td class="status-ok">
+            <button class="btn btn-danger">발주불가</button>
+          </td>
         </tr>
       </table>
     </section>
@@ -133,7 +150,9 @@
           </td>
           <td>1,500</td>
           <td>30개</td>
-          <td><button>재고충분</button></td>
+          <td class="stock_full">
+            <button class="btn btn-primary">재고충분</button>
+          </td>
         </tr>
         <tr>
           <td>2002</td>
@@ -144,7 +163,9 @@
           </td>
           <td>1,500</td>
           <td>3개</td>
-          <td><button>재고부족</button></td>
+          <td class="stock_short">
+            <button class="btn btn-primary">재고부족</button>
+          </td>
         </tr>
         <tr>
           <td>2003</td>
@@ -155,7 +176,9 @@
           </td>
           <td>1,700</td>
           <td>15개</td>
-          <td><button>재고충분</button></td>
+          <td class="stock_full">
+            <button class="btn btn-warning">재고충분</button>
+          </td>
         </tr>
       </table>
     </section>
@@ -183,7 +206,11 @@
           <td>3,500</td>
           <td>구자욱</td>
           <td>2026-01-10</td>
-          <td class="status-no">NO</td>
+          <td class="reserve_wait">
+            <button type="button" class="btn btn-outline-primary">
+              픽업대기
+            </button>
+          </td>
         </tr>
         <tr>
           <td>3023</td>
@@ -195,7 +222,9 @@
           <td>2,500</td>
           <td>배찬승</td>
           <td>2026-03-10</td>
-          <td class="status-no"><button>픽업완료</button></td>
+          <td class="reserve_ok">
+            <button class="btn btn-primary">픽업완료</button>
+          </td>
         </tr>
         <tr>
           <td>3015</td>
@@ -207,7 +236,11 @@
           <td>1,500</td>
           <td>원태인</td>
           <td>2026-04-10</td>
-          <td class="status-no">NO</td>
+          <td class="reserve_wait">
+            <button type="button" class="btn btn-outline-primary">
+              픽업 대기
+            </button>
+          </td>
         </tr>
         <tr>
           <td>2026</td>
@@ -219,11 +252,12 @@
           <td>1,500</td>
           <td>최형우</td>
           <td>2026-03-28</td>
-          <td class="status-no"><button>픽업완료</button></td>
+          <td class="reserve_ok">
+            <button class="btn btn-primary">픽업완료</button>
+          </td>
         </tr>
       </table>
     </section>
     <script src="상품관리.js"></script>
   </body>
 </html>
-
