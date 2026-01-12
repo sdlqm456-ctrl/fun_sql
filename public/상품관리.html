@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>편의점 상품관리</title>
+    <link rel="stylesheet" href="상품관리.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header class="header">
+      <h1 class="title">
+        <img src="img/logo.png" alt="편의점 로고 이미지" />
+        000편의점 000점 상품관리 페이지
+      </h1>
+    </header>
+    <!-- 탭 -->
+    <nav class="tabs">
+      <a href="#searchResult" class="tab">상품 검색</a>
+      <a href="#popular" class="tab">우리 점포 인기상품</a>
+      <a href="#stock" class="tab">재고현황</a>
+      <a href="#reserve" class="tab">예약상품</a>
+    </nav>
+
+    <section id="searchResult" class="content default">
+      <!--- 검색창 입력 부분 + 검색버튼 -->
+      <div class="search-section">
+        <input
+          type="text"
+          id="searchInput"
+          name="keyword"
+          placeholder="상품명 또는 상품번호 검색"
+        />
+        <button id="searchBtn">검색</button>
+      </div>
+      <div class="main-wrap">
+        <aside id="left_aside">
+          <h3>배너광고</h3>
+          <p>
+            000편의점 NEW 신상품 출시 화제의 두바이 쫀득쿠키 수량제한 입고
+            점포당 20개 한정! (( ง´°ω°*=͟͟͞))ว 입고문의 ☎ 1555-2222
+          </p>
+        </aside>
+        <!--검색결과-->
+        <div class="main-content">
+          <table border="1">
+            <thead>
+              <h3>검색결과</h3>
+              <tr>
+                <th>상품번호</th>
+                <th>상품종류</th>
+                <th>상품이름</th>
+                <th>가격(원)</th>
+                <th>재고</th>
+              </tr>
+            </thead>
+            <tbody id="productBody">
+              <tr>
+                <td colspan="5">검색 결과가 여기에 표시됩니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- 우리점포 인기상품 -->
+    <section id="popular" class="content">
+      <table>
+        <tr>
+          <th>상품번호</th>
+          <th>상품종류</th>
+          <th>상품이름</th>
+          <th>사진</th>
+          <th>판매량</th>
+          <th>가격(원)</th>
+          <th>발주</th>
+        </tr>
+        <tr>
+          <td>1001</td>
+          <td>음료</td>
+          <td>코카콜라 1.5L</td>
+          <td>
+            <img src="img/cola.webp" class="product-img" />
+          </td>
+          <td>150</td>
+          <td>1,200</td>
+          <td class="status-ok">
+            <button class="btn btn-success">발주하기</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1002</td>
+          <td>음료</td>
+          <td>칠성사이다 제로 500ml</td>
+          <td>
+            <img src="img/cider.jpg" class="product-img" />
+          </td>
+          <td>70</td>
+          <td>1,200</td>
+          <td class="status-ok">
+            <button class="btn btn-success">발주하기</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1003</td>
+          <td>음료</td>
+          <td>000푸드 자몽에이드 250ml</td>
+          <td>
+            <img src="img/ade.jpg" class="product-img" />
+          </td>
+          <td>100</td>
+          <td>1,600</td>
+          <td class="status-no">
+            <button class="btn btn-danger">발주불가</button>
+          </td>
+        </tr>
+        <tr>
+          <td>105</td>
+          <td>라면</td>
+          <td>삼양 불닭볶음면 컵</td>
+          <td>
+            <img src="img/cup.png" class="product-img" />
+          </td>
+          <td>250</td>
+          <td>1,600</td>
+          <td class="status-ok">
+            <button class="btn btn-danger">발주불가</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- 재고현황 -->
+    <section id="stock" class="content">
+      <table>
+        <tr>
+          <th>상품번호</th>
+          <th>상품종류</th>
+          <th>제품이름</th>
+          <th>사진</th>
+          <th>가격(원)</th>
+          <th>재고현황</th>
+          <th>재고확인</th>
+        </tr>
+        <tr>
+          <td>2001</td>
+          <td>과자</td>
+          <td>감자칩</td>
+          <td>
+            <img src="img/potato.jpg" class="product-img" />
+          </td>
+          <td>1,500</td>
+          <td>30개</td>
+          <td class="stock_full">
+            <button class="btn btn-primary">재고충분</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2002</td>
+          <td>과자</td>
+          <td>홈런볼</td>
+          <td>
+            <img src="img/homerun.webp" class="product-img" />
+          </td>
+          <td>1,500</td>
+          <td>3개</td>
+          <td class="stock_short">
+            <button class="btn btn-primary">재고부족</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2003</td>
+          <td>과자</td>
+          <td>꼬북칩</td>
+          <td>
+            <img src="img/cobuk.webp" class="product-img" />
+          </td>
+          <td>1,700</td>
+          <td>15개</td>
+          <td class="stock_full">
+            <button class="btn btn-warning">재고충분</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- 예약상품 -->
+    <section id="reserve" class="content">
+      <table>
+        <tr>
+          <th>상품번호</th>
+          <th>상품종류</th>
+          <th>예약제품이름</th>
+          <th>사진</th>
+          <th>가격(원)</th>
+          <th>예약자</th>
+          <th>예약일시</th>
+          <th>픽업여부</th>
+        </tr>
+        <tr>
+          <td>3001</td>
+          <td>도시락</td>
+          <td>불고기도시락</td>
+          <td>
+            <img src="img/dosirik.png" class="product-img" />
+          </td>
+          <td>3,500</td>
+          <td>구자욱</td>
+          <td>2026-01-10</td>
+          <td class="reserve_wait">
+            <button type="button" class="btn btn-outline-primary">
+              픽업대기
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>3023</td>
+          <td>샌드위치</td>
+          <td>ooo푸드 햄치즈샌드위치</td>
+          <td>
+            <img src="img/sandwich.jpg" class="product-img" />
+          </td>
+          <td>2,500</td>
+          <td>배찬승</td>
+          <td>2026-03-10</td>
+          <td class="reserve_ok">
+            <button class="btn btn-primary">픽업완료</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3015</td>
+          <td>김밥</td>
+          <td>ooo푸드 전주비빔삼각김밥</td>
+          <td>
+            <img src="img/janju.jpg" class="product-img" />
+          </td>
+          <td>1,500</td>
+          <td>원태인</td>
+          <td>2026-04-10</td>
+          <td class="reserve_wait">
+            <button type="button" class="btn btn-outline-primary">
+              픽업 대기
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>2026</td>
+          <td>음료</td>
+          <td>빙그레 바나나우유</td>
+          <td>
+            <img src="img/banana.png" class="product-img" />
+          </td>
+          <td>1,500</td>
+          <td>최형우</td>
+          <td>2026-03-28</td>
+          <td class="reserve_ok">
+            <button class="btn btn-primary">픽업완료</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+    <script src="상품관리.js"></script>
+  </body>
+</html>
