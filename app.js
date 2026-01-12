@@ -1,60 +1,43 @@
-// app.js(수정)
+// DB 서버생성
 
-// 1. 기본작업 (모듈, 인스턴트 생성)
+// 모듈 임포트
+const OracleDB = require("oracledb");
 
-// 모듈 생성
-const express = require("express");
-const BD = require("./DB");
+// 조회된 데이터를 객체방식으로 바꾸기
+OracleDB.outFormat = OracleDB.OUT_FORMAT_OBJECT;
 
-// 인스턴트 생성
-const app = express();
+const DBconfig = {
+  user: "scott",
+  password: "tiger",
+  connectString: "192.168.0.26:1521/xe",
+};
 
-app.use(express.static("public"));
-app.use(express.json());
-
-//2. 상품목록 가져오기
-
-// "/"
-app.get("/", (req, res) => {
-  // 요청정보, 웹페이지 정보 (실행함수)
-  res.send("/홈페이지에 오신걸 환영합니다");
-});
-app.get("/boards", async (req, res) => {
-  const qry = "select * from board";
+// DB 접속을 위한 세션을 받아오기ㄴ
+async function getConnection() {
   try {
-    const connection = await DB.getConnection();
-    const result = await connection.execute(qry);
-    console.log("연결 성공");
-    res.send(result.rows);
+    const connection = await OracleDB.getConnection(DBconfig);
+    return connection;
   } catch (err) {
-    console.log(err);
-    res.send("연결 실패");
+    console.log("DB 연결 실패:", err);
+    throw err;
   }
-});
-app.post("/add_board", async (req, res) => {
-  console.log(req.body);
+}
+
+// 테스트용: 비동기 처리에서 동기 방식 처리
+async function execute() {
   const qry = `INSERT INTO board (product_no, category, name, price, stock, img)
               VALUES ('1001','음료', '코카콜라 1.5L', 1200, 10, 'cola.webp')`;
   try {
-    const connection = await DB.getConnection();
-    const result = await connection.execute(qry, [
-      product_no,
-      category,
-      name,
-      price,
-      stock,
-      img,
-    ]);
-    console.log(result);
-    connection.commit();
-    res.json({ product_no, category, name, price, stock, img });
-  } catch (err) {
-    console.log(err);
-    res.json({ retCode: "NG", retMsg: "DB 에러" });
-  }
-});
+    const connection = await OracleDB.getConnection(DBconfig);
+    const result = await connection.execute(qry);
+    await connection.commit();
 
-// 서버실행
-app.listen(3000, () => {
-  console.log("server 실행 http://localhost:3000"); // 서버실행 포트가 3000
-});
+    console.log("DB 등록 OK");
+    console.log(result);
+    await connection.close(); // 연결 종료
+  } catch (err) {
+    console.log(`예외발생 => ${err}`);
+  }
+}
+
+module.exports = { getConnection };
